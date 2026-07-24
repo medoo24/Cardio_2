@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-site-key="hf">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Interactive heart failure study lab covering classification, pathophysiology, diagnosis, chronic and acute management, pharmacology, cases, flashcards, and quizzes.">
+  <meta name="theme-color" content="#173d63">
+  <title>Heart Failure Lab | Interactive Cardiology</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="upgrades.css">
+  <style>
+    :root{
+      --bg:#f5f7fb;--surface:#ffffff;--surface-2:#edf2f8;--surface-3:#dde7f1;
+      --text:#182839;--muted:#607286;--line:#cdd8e5;--line-strong:#9eb2c7;
+      --brand:#1b4e78;--brand-2:#2c73a7;--brand-deep:#102d49;--brand-soft:#e4f0f8;
+      --accent:#c84b5f;--accent-soft:#fff0f3;--purple:#6e5d99;--purple-soft:#f0ecf8;
+      --danger:#b51f38;--danger-soft:#fff0f2;--warning:#9b6515;--warning-soft:#fff6df;
+      --success:#147451;--success-soft:#e8f7ef;
+    }
+    [data-theme="dark"]{
+      --bg:#07121e;--surface:#101f30;--surface-2:#172c40;--surface-3:#20394f;
+      --text:#edf5fc;--muted:#a8bacb;--line:#2d455c;--line-strong:#49657e;
+      --brand:#88c8f0;--brand-2:#b4ddf6;--brand-deep:#122f4c;--brand-soft:#17354b;
+      --accent:#ff91a3;--accent-soft:#42232c;--purple:#c7b7e7;--purple-soft:#312941;
+      --danger:#ff8d9d;--danger-soft:#432129;--warning:#f5c46e;--warning-soft:#3e321d;
+      --success:#76d7ad;--success-soft:#173c30;
+    }
+    .sidebar{background:linear-gradient(180deg,#102c48 0%,#1b4e78 52%,#5b2842 100%)}
+    .brand-icon{color:#ffdce4}.pulse-dot{background:var(--accent)}
+    .hero-heart{width:min(330px,80vw);margin-inline:auto;display:block;filter:drop-shadow(0 20px 32px rgba(23,61,99,.16))}
+    .hero-heart .beat{animation:beat 2.1s ease-in-out infinite;transform-origin:center}
+    @keyframes beat{0%,100%{transform:scale(1)}10%{transform:scale(1.035)}18%{transform:scale(1)}26%{transform:scale(1.025)}36%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){.hero-heart .beat{animation:none}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation">
+      <div class="brand-panel">
+        <a class="brand" href="#overview" data-route="overview" aria-label="Heart Failure Lab home">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 72 72" role="img">
+              <path d="M36 61C18 51 11 37 16 24c4-10 16-13 20-3 4-10 16-7 20 3 5 13-2 27-20 37Z" fill="none" stroke="currentColor" stroke-width="3.2"/>
+              <path d="M17 38h10l4-10 7 22 5-15h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span><strong>Heart Failure Lab</strong><small>Mechanisms · diagnosis · management</small></span>
+        </a>
+        <button class="icon-button sidebar-close" id="sidebar-close" type="button" aria-label="Close navigation">×</button>
+      </div>
+      <nav id="course-nav" class="course-nav" aria-label="Connected study map"></nav>
+      <div class="sidebar-progress">
+        <div class="progress-copy"><span>Visited modules</span><strong id="progress-label">1 / 32</strong></div>
+        <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+        <div class="sidebar-actions">
+          <button class="text-button" id="reset-progress" type="button">Reset progress</button>
+          <button class="text-button" id="clear-bookmarks" type="button">Clear bookmarks</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menu-button" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="topbar-title"><span class="pulse-dot" aria-hidden="true"></span><span id="current-section-label">Overview</span></div>
+        <div class="topbar-actions">
+          <label class="search-box" for="site-search"><span aria-hidden="true">⌕</span><input id="site-search" type="search" placeholder="Search HFrEF, BNP, edema, shock…" autocomplete="off"><kbd>/</kbd></label>
+          <button class="icon-button" id="bookmarks-button" type="button" aria-label="Open bookmarks" title="Bookmarks">★</button>
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">◐</button>
+          <div class="voice-status" id="voice-pill" title="Text-to-speech voice"><span aria-hidden="true">◉</span><span id="voice-status">Loading voice…</span></div>
+          <label class="rate-control" for="speech-rate"><span>Voice</span><select id="speech-rate" aria-label="Speech rate"><option value="0.82">0.82×</option><option value="0.92" selected>0.92×</option><option value="1">1×</option><option value="1.1">1.1×</option><option value="1.2">1.2×</option></select></label>
+          <button class="icon-button" id="stop-speech" type="button" aria-label="Stop and reset speech" title="Stop and reset speech">■</button>
+          <button class="icon-button" id="print-button" type="button" aria-label="Print current module" title="Print current module">⎙</button>
+        </div>
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
+      </header>
+
+      <main id="main-content" tabindex="-1"><div id="app-content" aria-live="polite"></div></main>
+
+      <footer class="site-footer">
+        <p><strong>Heart Failure Lab</strong> is an educational study aid. Real patients require individualized assessment, current prescribing information, and local protocols—especially in acute heart failure or shock.</p>
+        <button class="text-button" data-route="sources" type="button">Source, scope, and references</button>
+      </footer>
+    </div>
+  </div>
+
+  <dialog class="bookmark-dialog" id="bookmark-dialog">
+    <div class="dialog-head"><div><p class="eyebrow">Saved for revision</p><h2>Bookmarks</h2></div><button class="icon-button" id="close-bookmarks" type="button" aria-label="Close bookmarks">×</button></div>
+    <div id="bookmark-list"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+  <script src="upgrades.js"></script>
+</body>
+</html>
